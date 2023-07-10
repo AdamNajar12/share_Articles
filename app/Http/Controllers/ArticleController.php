@@ -87,14 +87,43 @@ class ArticleController extends Controller
         $article->delete();
         return redirect()->route('articles.index');
     }
-    public function showFront()
+    public function getArticles()
+{
+    $articles = Article::join('users', 'articles.user_id', '=', 'users.id')
+        ->select('articles.*', 'users.name as user_name')
+        ->paginate(10);
+
+    return $articles;
+}
+    public function Front()
     {
     
-        $articles = Article::join('users', 'articles.user_id', '=', 'users.id')
-        ->select('articles.*', 'users.name as user_name')
-    ->paginate(10);
+        $articles = $this->getArticles();
+    ;
 
-return view('layouts.front', compact('articles'));
+return view('layouts.testfront', ['articles' => $articles]);
 
+    }
+    public function addFront()
+    {
+        $users = User::all();
+        return view('layouts.addFront',compact('users'));
+
+    }
+    public function storeFront(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'user_id' => 'required|exists:users,id',
+        ]); 
+    
+        $article = Article::create([
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'user_id' => $validatedData['user_id'],
+        ]);
+    
+        return redirect()->route('layouts.frontend');
     }
 }

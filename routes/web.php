@@ -29,4 +29,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/front', [ArticleController::class, 'showFront'])->name('layouts.front');
+Route::get('/addfront', [ArticleController::class, 'addFront'])->name('layouts.addFront');
+Route::post('/front', [ArticleController::class, 'storeFront'])->name('layouts.storeFront');
+Route::get('/show', [ArticleController::class, 'Front'])->name('layouts.frontend');
