@@ -59,7 +59,10 @@
 	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
 		</aside> <!-- END COLORLIB-ASIDE -->
-		<div id="colorlib-main">
+	@foreach ( $articles as $article )
+        
+    @endforeach
+    	<div id="colorlib-main">
 			<section class="ftco-section ftco-no-pt ftco-no-pb">
 	    	<div class="container">
 	    		<div class="row d-flex">
@@ -67,15 +70,15 @@
 	    				<div class="row pt-md-4">
 	    					<div class="col-md-12">
 		    					<div class="blog-entry-2 ftco-animate">
-	    							<a href="single.html" class="img" style="background-image: url(images/image_1.jpg);"></a>
+	    							<a href="single.html" class="img" style="background-image: url({{asset('frontend/images/image_1.jpg')}});"></a>
 	    							<div class="text pt-4">
-				              <h3 class="mb-4"><a href="#">A Loving Heart is the Truest Wisdom</a></h3>
-				              <p class="mb-4">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+				              <h3 class="mb-4"><a href="#">{{ $article->title }}</a></h3>
+				              <p class="mb-4">{{ $article->content }}</p>
 				              <div class="author mb-4 d-flex align-items-center">
-				            		<a href="#" class="img" style="background-image: url(images/person_1.jpg);"></a>
+				            		<a href="#" class="img" style="background-image: url({{asset('frontend/images/person_1.jpg')}});"></a>
 				            		<div class="ml-3 info">
 				            			<span>Written by</span>
-				            			<h3><a href="#">Dave Lewis</a>, <span>June 28, 2019</span></h3>
+				            			<h3><a href="#">{{$article->user_name}}</a>, <span>June 28, 2019</span></h3>
 				            		</div>
 				            	</div>
 				              <div class="meta-wrap d-md-flex align-items-center">
